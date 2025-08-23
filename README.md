@@ -21,7 +21,7 @@ pair project phase 1
 ## additional migration such as add column, rename add constraint etc 
 * add column []
 ## creating seeder minimum 1 
-# please fill below new sedder with format * seeder name
+### please fill below new sedder with format * seeder name
 * seeder <name> []
 
 
