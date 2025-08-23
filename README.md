@@ -1,2 +1,2 @@
 # js-commerce
-pair project phase 0
+pair project phase 1
