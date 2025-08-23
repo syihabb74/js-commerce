@@ -4,8 +4,8 @@ pair project phase 1
 ### Noted if you done with you're working with please fill the [] with [x] for example 
 
 ## requirement level db
-- [] schema table
-- entity must be applied [User] with attributes
+* schema table []
+## entity must be applied [User] with attributes
 * [email] []
 * [password] []
 * [role] []
@@ -15,9 +15,14 @@ pair project phase 1
 * [one-to-many] []
 * [many-to-many] []
 
-## creating model & migration []
-## additional migration such as add column, rename add constraint etc []
-## creating seeder minimum 1 []
+## creating model & migration 
+* model []
+* migration []
+## additional migration such as add column, rename add constraint etc 
+* add column []
+## creating seeder minimum 1 
+# please fill below new sedder with format * seeder name
+* seeder <name> []
 
 
 ### detail color
