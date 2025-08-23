@@ -26,17 +26,17 @@ pair project phase 1
 
 
 ### detail color
-## background color
+#### background color
 #F7F7F7
 
-## button color
+#### button color
 #EA2A32
 
-## navbar color && card product color
+#### navbar color && card product color
 #FFFFFF
 
-## font small details
+#### font small details
 #848A95
 
-## instock color
+#### instock color
 #21A54E
