@@ -1,0 +1,62 @@
+[
+    {
+      "id": 1,
+      "email": "john.doe@example.com",
+      "password": "password123",
+      "username": "johndoe"
+    },
+    {
+      "id": 2,
+      "email": "jane.smith@example.com",
+      "password": "jane2024",
+      "username": "janesmith"
+    },
+    {
+      "id": 3,
+      "email": "mike.wilson@example.com",
+      "password": "mikepass",
+      "username": "mikewilson"
+    },
+    {
+      "id": 4,
+      "email": "sarah.jones@example.com",
+      "password": "sarah456",
+      "username": "sarahjones"
+    },
+    {
+      "id": 5,
+      "email": "alex.brown@example.com",
+      "password": "alexbrown",
+      "username": "alexbrown"
+    },
+    {
+      "id": 6,
+      "email": "lisa.garcia@example.com",
+      "password": "lisa789",
+      "username": "lisagarcia"
+    },
+    {
+      "id": 7,
+      "email": "david.miller@example.com",
+      "password": "david2024",
+      "username": "davidmiller"
+    },
+    {
+      "id": 8,
+      "email": "emma.davis@example.com",
+      "password": "emma321",
+      "username": "emmadavis"
+    },
+    {
+      "id": 9,
+      "email": "chris.anderson@example.com",
+      "password": "chrispass",
+      "username": "chrisanderson"
+    },
+    {
+      "id": 10,
+      "email": "olivia.taylor@example.com",
+      "password": "olivia123",
+      "username": "oliviataylor"
+    }
+  ]
