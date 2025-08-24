@@ -27,7 +27,8 @@ pair project phase 1
 
 ### detail color
 #### background color
-#F7F7F7
+#F7F7F7 -> page
+#EEE7E8 -> container
 
 #### button color
 #EA2A32
