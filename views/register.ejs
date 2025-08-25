@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('partials/head') %>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="min-h-screen w-full flex justify-center items-center p-20" style="background-color: #EEE7E8;">
+        <div class="w-5xl h-8xl p-10 flex justify-center bg-white rounded-2xl">
+            <form action="/register" method="post">
+                <center>
+                    <div style="margin-bottom: 20px;">
+                        <h1 class="text-2xl text-center">Create Your Account</h1>
+                    </div>
+                </center>
+                <div class="grid grid-rows-5 max-w-xl gap-5">
+                    <div class="border-black">
+                        <input placeholder="Username" class="w-2xl border-black" name="username" type="text">
+                    </div>
+                    <div class="border-black">
+                        <input placeholder="Email" class="w-2xl border-black" name="email" type="email">
+                        <% if (erroremail) { %>
+                         <p class="text-red-500"><%= erroremail %></p>
+                        <% } %>
+                    </div>
+                    <div class="border-black">
+                        <input placeholder="Password" class="w-2xl border-black" name="password" type="password">
+                        <% if (errorpasswordmatch) { %>
+                        <p class="text-red-500"><%= errorpasswordmatch %></p>
+                    <% } %>
+                    </div>
+                    <div class="border-black">
+                        <input placeholder="Confirmation Password" class="w-2xl border-black" name="confirmationPass" type="password">
+                        <% if (errorpasswordmatch) { %>
+                        <p class="text-red-500"><%= errorpasswordmatch %></p>
+                    <% } %>
+                    </div>
+                    <center>
+                        <div class="border-black">
+                            <input type="submit" style="background-color: #EA2A32; padding: 10px;" class="rounded-xl" value="Create Your Account">
+                        </div>
+                    </center>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    
+</body>
+</html>
