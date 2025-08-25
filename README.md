@@ -1,28 +1,29 @@
 # js-commerce
 pair project phase 1
 
-### Noted if you done with you're working with please fill the [] with [x] for example 
+### Noted if you done with you're working with please fill the [] with [v] for example 
 
 ## requirement level db
-* schema table []
+* schema table [v]
 ## entity must be applied [User] with attributes
-* [email] []
-* [password] []
-* [role] []
+* [email] [v]
+* [password] [v]
+* [role] [v]
 
 ## type
-* [one-to-one] []
-* [one-to-many] []
-* [many-to-many] []
+* [one-to-one] [v]
+* [one-to-many] [v]
+* [many-to-many] [v]
 
 ## creating model & migration 
-* model []
-* migration []
+* model [v]
+* migration [v]
 ## additional migration such as add column, rename add constraint etc 
-* add column []
+* add column [v]
 ## creating seeder minimum 1 
 ### please fill below new sedder with format * seeder name
-* seeder <name> []
+* seeder 1 [v]
+* seeder <name>
 
 
 ### detail color
