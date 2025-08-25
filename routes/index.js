@@ -4,7 +4,7 @@ const Login = require('./login');
 const Register = require('./register');
 
 
-router.use('/', Home.Home)
+router.get('/', Home.Home)
 router.use('/login', Login);
 router.use('/register',Register);
 

@@ -1,9 +1,10 @@
 class Home {
+
     static async Home (req,res) {
 
         try {
 
-            res.send('Home')
+            res.send('test')
             
         } catch (error) {
          
@@ -12,6 +13,7 @@ class Home {
         }
 
     }
+
 }
 
 module.exports = { Home }

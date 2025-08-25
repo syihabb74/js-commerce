@@ -1,12 +1,21 @@
 const bcryptjs = require('bcryptjs');
+const {User} = require('../models');
+const user = require('../models/user');
 
 class UserAuth {
 
     static async RegisterUser (req, res) {
 
         try {
+
+            // console.log(await User.findAll())
+
+            const {errorpasswordmatch, erroremail} = req.query;
             
-            res.send('error');
+            res.render('register', {
+                errorpasswordmatch,
+                erroremail
+            })
 
         } catch (error) {
             
@@ -20,16 +29,25 @@ class UserAuth {
 
         try {
 
-            const {email,password,username,} = req.body
-
-            const salt = bcryptjs.genSalt(10);
-            // const hash = bcryptjs.hashSync('', salt) for later
+            const {email,username,password,confirmationPass} = req.body
+            console.log(password !== confirmationPass)
+            if (password !== confirmationPass) throw { matchpassmsg : 'Password not matching'};
+            await User.create({email,username,password});
             
-            res.send('error');
+            res.send('ttep kesini');
 
         } catch (error) {
+
+            console.log(error)
             
-            res.send(error)
+            if (error.matchpassmsg) {
+                res.redirect(`/register?errorpasswordmatch=${error.matchpassmsg}`)
+            } else {
+                if (error.name === 'SequelizeUniqueConstraintError') {
+                    const alreadyReg = error.errors[0].message
+                    res.redirect(`/register/?erroremail=${alreadyReg}`);
+                }
+            }
 
         }
 
@@ -39,7 +57,7 @@ class UserAuth {
 
         try {
             
-            res.send('error');
+            res.render('verificationReg')
 
         } catch (error) {
             
@@ -96,4 +114,4 @@ class UserAuth {
 }
 
 
-module.exports = {UserAuth}
+module.exports = { UserAuth }

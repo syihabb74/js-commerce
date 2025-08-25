@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     email: {
       type :DataTypes.STRING,
-      unique : true,
+      unique: {
+        msg: 'Email already registered, please use another email'
+      },
       allowNull : false,
       validate : {
         isEmail : true,
@@ -29,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
           msg : 'Email is empty please fill with your Email'
         },
         len : {
-          args : [5,255],
+          args : [3,255],
           msg : 'Something wrong with your input'
         }
       }
@@ -53,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type : DataTypes.STRING,
     },
-    role: DataTypes.STRING
+    role: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
@@ -61,6 +63,9 @@ module.exports = (sequelize, DataTypes) => {
 
 
   User.beforeCreate((usr) => {
+    const salt = bcryptjs.genSaltSync(10);
+    const hash = bcryptjs.hashSync(usr.password, salt);
+    usr.password = hash
     usr.role = 'user';
     usr.balance = 0;
     const randomId = Math.floor(Math.random() * 100000);
