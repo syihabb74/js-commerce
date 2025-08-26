@@ -56,6 +56,7 @@ class UserAuth {
                     res.send(error)
                     
                 } else {
+                    console.log(error)
                     res.send(error)
                 }
             }
@@ -94,7 +95,7 @@ class UserAuth {
             const isValidCode = bcryptjs.compareSync(verification, token);
             if (isValidCode) {
                 await User.update({isActive : true}, {where: {email : email}});
-                return res.redirect('/')
+                return res.redirect('/login')
             };
             throw {message : 'Invalid code verification'} 
 
@@ -126,11 +127,21 @@ class UserAuth {
 
         try {
             const {email, password} = req.body;
-            const isUserExist = await User.findOne({email});
+            const isUserExist = await User.findOne({where: {email}});
             if (!isUserExist) throw {message : 'Invalid email/password'};
-            const isPasswordCorrect = bcryptjs.compareSync(password,isUserExist.dataValues.password);
-            if (!isPasswordCorrect) throw { message : 'Invalid email/password' };
-            res.send('Anda sudah masuk')
+            console.log(isUserExist)
+            const isPasswordCorrect = bcryptjs.compareSync(password, isUserExist.password);
+            if (isPasswordCorrect) {
+                req.session.userId = isUserExist.id
+                req.session.role = isUserExist.role
+                if (req.session.userId && req.session.role === 'user') {
+                    return res.redirect('/')
+                } else if (req.session.userId && req.session.role === 'admin') {
+                    return res.redirect('/admin')
+                }
+            } else {
+                throw { message : 'Invalid email/password' }
+            }
 
         } catch (error) {
             
@@ -138,6 +149,20 @@ class UserAuth {
 
         }
 
+    }
+
+    static async getLogout(req, res) {
+        try {
+            req.session.destroy(err => {
+                if (err) {
+                    res.send(err)
+                } else{
+                    res.redirect('/login')
+                }
+            })
+        } catch (error) {
+            res.send(error)
+        }
     }
     
 

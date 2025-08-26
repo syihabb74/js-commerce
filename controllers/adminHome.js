@@ -1,10 +1,10 @@
-class Home {
+class adminHome {
 
     static async Home (req,res) {
 
         try {
 
-            res.render('home')
+            res.render('test')
             
         } catch (error) {
          
@@ -16,4 +16,4 @@ class Home {
 
 }
 
-module.exports = { Home }
+module.exports = { adminHome }

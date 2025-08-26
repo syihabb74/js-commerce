@@ -9,7 +9,7 @@ class Dashboard {
             const {deleted} = req.query;
 
             const listProduct = await Product.findAll();
-            console.log(listProduct)
+            // console.log(listProduct)
             const id = 3;
 
             res.render('dashboard', {listProduct, id, deleted})
