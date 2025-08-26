@@ -1,6 +1,6 @@
 'use strict';
-const bcryptjs = require('bcryptjs');
 
+const {hash} = require('../helpers/helper')
 const {
   Model
 } = require('sequelize');
@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasOne(models.UserProfile, {foreignKey: 'UserId'});
+      User.hasMany(models.Product, {foreignKey : 'UserId'})
     }
   }
   User.init({
@@ -23,17 +24,16 @@ module.exports = (sequelize, DataTypes) => {
       },
       allowNull : false,
       validate : {
-        isEmail : true,
+        isEmail : {
+          msg : 'Invalid email format'
+        }
+        ,
         notNull : {
           msg : 'Email is empty please fill with your Email'
         },
         notEmpty : {
           msg : 'Email is empty please fill with your Email'
         },
-        len : {
-          args : [3,255],
-          msg : 'Something wrong with your input'
-        }
       }
     },
     password: {
@@ -56,6 +56,8 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
     },
     role: DataTypes.STRING,
+    balance : DataTypes.INTEGER,
+    isActive : DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'User',
@@ -63,9 +65,8 @@ module.exports = (sequelize, DataTypes) => {
 
 
   User.beforeCreate((usr) => {
-    const salt = bcryptjs.genSaltSync(10);
-    const hash = bcryptjs.hashSync(usr.password, salt);
-    usr.password = hash
+    const hashing = hash(usr.password)
+    usr.password = hashing
     usr.role = 'user';
     usr.balance = 0;
     const randomId = Math.floor(Math.random() * 100000);
@@ -74,6 +75,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
+  User.afterCreate(async (usr) => {
+     await usr.createUserProfile()
+  })
 
   return User;
 };

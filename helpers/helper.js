@@ -1,25 +1,47 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
-async function sendMail(code) {
-  // 1. Buat transporter
+const bcryptjs = require('bcryptjs');
+const nodemailer = require("nodemailer");
+
+async function sendMail(verificationCode, email) {
   const transporter = nodemailer.createTransport({
-    service: 'gmail', // bisa juga pakai host & port manual
+    service: "gmail",
     auth: {
-      user: process.env.EMAIL_USER, 
-      pass: process.env.EMAIL_PASS  
-    }
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
   });
 
-  const info = await transporter.sendMail({
-    from: 'JS Commerce<syihabb74@gmail.com>', // sender
-    to: 'clarenth6@gmail.com',                   // receiver
-    subject: 'Test Email dari Nodemailer',
-    text: `Your Verification Code is ${code}`,
-    html: '<b>Halo</b>, ini email test dari Nodemailer pakai Gmail SMTP.'
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Verification Code",
+    text: `Your verification code is: ${verificationCode}`,
   });
 
-  console.log('✅ Email terkirim: %s', info.messageId);
+  console.log('Email Sending......')
+
 }
+
+
+const hash = (code) => {
+
+    const salt = bcryptjs.genSaltSync(10);
+    if (typeof code === 'number') {
+        code += ''
+            const hash = bcryptjs.hashSync(code, salt);
+            return hash
+    } 
+    
+    const hash = bcryptjs.hashSync(code, salt);
+    return hash
+
+    
+
+}
+
+
+module.exports = {hash, sendMail};
+
+
 
 
 

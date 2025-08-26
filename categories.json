@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "name": "Electronics",
+      "createdAt": "2024-01-15T08:30:00.000Z",
+      "updatedAt": "2024-01-15T08:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Clothing",
+      "createdAt": "2024-01-15T08:35:00.000Z",
+      "updatedAt": "2024-01-15T08:35:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Books",
+      "createdAt": "2024-01-15T08:40:00.000Z",
+      "updatedAt": "2024-01-15T08:40:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Home & Garden",
+      "createdAt": "2024-01-15T08:45:00.000Z",
+      "updatedAt": "2024-01-15T08:45:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Sports & Outdoors",
+      "createdAt": "2024-01-15T08:50:00.000Z",
+      "updatedAt": "2024-01-15T08:50:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Beauty & Health",
+      "createdAt": "2024-01-15T08:55:00.000Z",
+      "updatedAt": "2024-01-15T08:55:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Toys & Games",
+      "createdAt": "2024-01-15T09:00:00.000Z",
+      "updatedAt": "2024-01-15T09:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Automotive",
+      "createdAt": "2024-01-15T09:05:00.000Z",
+      "updatedAt": "2024-01-15T09:05:00.000Z"
+    }
+  ]

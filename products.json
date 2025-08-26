@@ -1,0 +1,86 @@
+[
+    {
+      "id": 1,
+      "name": "iPhone 15 Pro Max",
+      "price": 1299,
+      "stock": 50,
+      "description": "Latest Apple flagship smartphone with titanium design and advanced camera system",
+      "imageUrl": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T10:00:00.000Z",
+      "updatedAt": "2024-01-15T10:00:00.000Z",
+      "UserId": 1,
+      "CategoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Nike Air Max 270",
+      "price": 150,
+      "stock": 120,
+      "description": "Comfortable running shoes with maximum Air cushioning",
+      "imageUrl": "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T11:00:00.000Z",
+      "updatedAt": "2024-01-15T11:00:00.000Z",
+      "UserId": 2,
+      "CategoryId": 2
+    },
+    {
+      "id": 3,
+      "name": "The Great Gatsby",
+      "price": 12,
+      "stock": 75,
+      "description": "Classic American novel by F. Scott Fitzgerald",
+      "imageUrl": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T11:30:00.000Z",
+      "updatedAt": "2024-01-15T11:30:00.000Z",
+      "UserId": 3,
+      "CategoryId": 3
+    },
+    {
+      "id": 4,
+      "name": "Dyson V15 Detect",
+      "price": 749,
+      "stock": 15,
+      "description": "Powerful cordless vacuum with laser dust detection technology",
+      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T12:00:00.000Z",
+      "updatedAt": "2024-01-15T12:00:00.000Z",
+      "UserId": 4,
+      "CategoryId": 4
+    },
+    {
+      "id": 5,
+      "name": "Wilson Tennis Racket Pro Staff",
+      "price": 199,
+      "stock": 40,
+      "description": "Professional tennis racket used by top players worldwide",
+      "imageUrl": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T12:30:00.000Z",
+      "updatedAt": "2024-01-15T12:30:00.000Z",
+      "UserId": 5,
+      "CategoryId": 5
+    },
+    {
+      "id": 6,
+      "name": "Cetaphil Gentle Cleanser",
+      "price": 14,
+      "stock": 150,
+      "description": "Gentle daily facial cleanser for sensitive skin",
+      "imageUrl": "https://images.unsplash.com/photo-1556228578-dd6e26371cd4?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T13:00:00.000Z",
+      "updatedAt": "2024-01-15T13:00:00.000Z",
+      "UserId": 6,
+      "CategoryId": 6
+    },
+    {
+      "id": 7,
+      "name": "PlayStation 5 Console",
+      "price": 499,
+      "stock": 20,
+      "description": "Next-generation gaming console with ultra-high speed SSD",
+      "imageUrl": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=300&fit=crop",
+      "createdAt": "2024-01-15T13:30:00.000Z",
+      "updatedAt": "2024-01-15T13:30:00.000Z",
+      "UserId": 7,
+      "CategoryId": 7
+    }
+  ]

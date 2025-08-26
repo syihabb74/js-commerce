@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <div class="min-h-screen w-full flex justify-center p-20" style="background-color: #EEE7E8">
+        <div class=" flex items-center justify-center bg-white rounded-2xl p-4 w-full">
+            <form action="/products/edit/<%= product.id %>" method="post">
+                <h1 style="text-align: center;" class="mb-10 text-2xl">Edit Product</h1>
+                <div class="max-w-4xl grid grid-rows-7 gap-5">
+                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" value="<%= product.name %>" name="name" type="text" placeholder="Name Product" id="">
+                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" value="<%= product.price %>" name="price" type="number" placeholder="Price Product" id="">
+                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" value="<%= product.stock %>" name="stock" type="number" placeholder="Stock Product" id="">
+                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" value="<%= product.description %>" name="description" type="text" placeholder="Description Product" id="">
+                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" value="<%= product.imageUrl %>" name="imageUrl" type="text" placeholder="Image Product" id="">
+                        <select style="background-color: #ecf2f9 ;display: inline-block;" class="px-3" name="CategoryId" id="">
+                            <% categories.forEach(category => { %>
+                                <option style="background-color: #F9FAFB ;display: inline-block;" <%= category.id === product.CategoryId ? 'selected' : '' %> class="w-lg h-10 shadow-sm px-3" value="<%= category.id %>"><%= category.name %></option>
+                            <% }) %>
+                        </select>
+                         <input style="display: inline-block; font-size: 16px;" class="text-center w-lg h-10 shadow-sm bg-red-500 hover:bg-red-600 text-white px-2 text-xs py-1 rounded-md transition duration-300 font-semibold" value="Edit Product" type="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
