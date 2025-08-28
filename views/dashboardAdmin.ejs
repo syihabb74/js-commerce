@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/navAdmin') %>
+        <title>Dashboard Admin</title>
+        <%- include('partials/head') %>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <nav class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-6 py-4">
+
+                <form action="/admin/products" method="get" class="relative flex-1 max-w-xs">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input name="search" type="text"
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
+                        placeholder="Search product..." />
+                </form>
+
+                <form action="/admin/products" method="get" class="flex items-center space-x-4">
+                    <button type="submit"
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-200">
+                        Search By Category
+                    </button>
+                    <select name="CategoryId"
+                        class="bg-gray-50 border border-gray-200 text-gray-700 py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                        <option selected disabled>Select Category</option>
+                        <% if (typeof categories !=='undefined' ) { %>
+                            <% categories.forEach(category=> { %>
+                                <option value="<%= category.id %>">
+                                    <%= category.name %>
+                                </option>
+                                <% }) %>
+                                    <% } %>
+                    </select>
+                </form>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <% if (deleted) { %>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+                <%= deleted %> already deleted
+            </div>
+        </div>
+        <% } %>
+
+            <div class="min-h-screen w-full flex justify-center p-20" style="background-color: #EEE7E8">
+                <div class="grid grid-cols-5 bg-white gap-3 rounded-2xl p-4" style="background-color: #F9FAFB;">
+                    <% listProduct.forEach(el=> { %>
+                        <div
+                            class="bg-white rounded-xl overflow-hidden hover:shadow-2xl shadow-lg transition duration-500 ease-in-out">
+                            <div class="overflow-hidden">
+                                <img class="w-full h-48 object-cover" src="<%= el.imageUrl %>" alt="<%= el.name %>">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-semibold text-lg mb-2">
+                                    <%= el.name %>
+                                </h3>
+                                <div>
+                                    <p class="text-gray-600 text-sm mb-2">
+                                        <%= el.maxFourWords %><a style="color: black;" href="/products/<%= el.id %>">
+                                                Get Details...</a>
+                                    </p>
+                                </div>
+                                <h2 class="text-red-500 font-bold text-xl">$<%= el.price %>
+                                </h2>
+                                <% if (el.price) { %>
+                                    <h2 class="mb-2 mt-2 text-red-400 font-bold text-sm">Stock : <%= el.stock %>
+                                    </h2>
+                                    <% } else { %>
+                                        <h2 class="mb-2 mt-2 text-red-400 font-bold text-sm">Out Of Stock</h2>
+                                        <% } %>
+                                            <div class="grid grid-rows-1 gap-3">
+                                                <div>
+                                                    <a href="/admin/delete/<%= el.id %>">
+                                                        <button
+                                                            class="bg-red-500 hover:bg-red-600 text-white px-2 text-xs py-1 rounded-md transition duration-300 font-semibold">Delete
+                                                            Product</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "postgre",
     "database": "js-commerce",
     "host": "127.0.0.1",
     "dialect": "postgres"
