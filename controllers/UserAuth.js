@@ -1,11 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const {User} = require('../models');
-
-
-
 const { hash, sendMail } = require('../helpers/helper');
-
-
 
 class UserAuth {
 
@@ -56,7 +51,7 @@ class UserAuth {
                     res.send(error)
                     
                 } else {
-                    console.log(error)
+                    // console.log(error)
                     res.send(error)
                 }
             }
@@ -129,7 +124,7 @@ class UserAuth {
             const {email, password} = req.body;
             const isUserExist = await User.findOne({where: {email}});
             if (!isUserExist) throw {message : 'Invalid email/password'};
-            console.log(isUserExist)
+            // console.log(isUserExist)
             const isPasswordCorrect = bcryptjs.compareSync(password, isUserExist.password);
             if (isPasswordCorrect) {
                 req.session.userId = isUserExist.id

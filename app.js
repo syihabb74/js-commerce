@@ -10,9 +10,12 @@ const PORT = 3000;
 
 
 app.set('view engine', 'ejs');
+app.locals.isActive = function(current, target) {
+    return current === target ? 'text-green-500 border-b-4 border-green-500' : 'text-gray-500 hover:text-green-500';
+}
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-    secret: 'confidential',
+    secret: 'your-secret-key',
     resave: false,
     saveUninitialized: false,
     cookie: { 
@@ -21,8 +24,7 @@ app.use(session({
     }
 }))
 
-app.use(routes);
-
+app.use('/', routes);
 
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
