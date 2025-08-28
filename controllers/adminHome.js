@@ -43,6 +43,14 @@ class adminHome {
         }
     }
 
+    static async Delete(req, res) {
+        try {
+            await Product.update({})
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
     static async Logout(req, res) {
         try {
             req.session.destroy(err => {
