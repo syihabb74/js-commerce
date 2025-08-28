@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ShopAll</title>
+    <title>Login - JS Commerce</title>
     <%- include('partials/head') %>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background-color: #f5f3f4;
@@ -15,7 +14,6 @@
 <body>
     <div class="min-h-screen w-full flex items-center justify-center p-20">
         <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
-            <!-- Logo Section -->
             <div class="text-center mb-8">
                 <div class="flex justify-center mb-4">
                     <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
@@ -26,16 +24,13 @@
                 <h1 class="text-2xl font-semibold text-gray-900 mb-2">Login Your Account</h1>
             </div>
 
-            <!-- Login Form -->
             <form action="/login" method="post" class="space-y-6">
-                <!-- Error Message -->
                 <% if (invalidlogin) { %>
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center">
                         <%= invalidlogin %>
                     </div>
                 <% } %>
 
-                <!-- Email Field -->
                 <div>
                     <input 
                         type="email" 
@@ -45,7 +40,6 @@
                     >
                 </div>
 
-                <!-- Password Field -->
                 <div>
                     <input 
                         type="password" 
@@ -55,7 +49,6 @@
                     >
                 </div>
 
-                <!-- Login Button -->
                 <div>
                     <input 
                         type="submit"
@@ -65,7 +58,6 @@
                 </div>
             </form>
 
-            <!-- Additional Links -->
             <div class="mt-6 text-center">
                 <a href="/register" class="text-red-500 hover:text-red-600 font-medium transition-colors">
                     Don't have an account? Sign up

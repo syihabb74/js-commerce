@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product - ShopAll</title>
+    <title>Edit Product - JS Commerce</title>
     <%- include('partials/head') %>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background-color: #f5f3f4;
@@ -13,11 +12,9 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
                         <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
@@ -27,16 +24,13 @@
                     </div>
                 </div>
                 
-                <!-- Navigation -->
                 <nav class="hidden md:flex space-x-6">
                     <a href="/products" class="text-gray-600 hover:text-red-500">Products</a>
                     <a href="/categories" class="text-gray-600 hover:text-red-500">Categories</a>
                     <a href="/profile" class="text-gray-600 hover:text-red-500">Profile</a>
                 </nav>
                 
-                <!-- User Actions -->
                 <div class="flex items-center space-x-4">
-                    <!-- Balance Display -->
                     <div class="flex items-center bg-green-100 px-3 py-1 rounded-lg">
                         <svg class="w-4 h-4 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
@@ -58,14 +52,11 @@
 
     <div class="min-h-screen w-full flex items-center justify-center p-20">
         <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-2xl">
-            <!-- Logo Section -->
             <div class="text-center mb-8">
                 <h1 class="text-2xl font-semibold text-gray-900 mb-2">Edit Product</h1>
             </div>
 
-            <!-- Edit Product Form -->
             <form action="/products/edit/<%= product.id %>" method="post" class="space-y-6">
-                <!-- Error Messages -->
                 <% if (errors && errors.length) { %>
                     <div class="space-y-2">
                         <% errors.forEach(error => { %>
@@ -76,7 +67,6 @@
                     </div>
                 <% } %>
 
-                <!-- Product Name -->
                 <div>
                     <input 
                         type="text" 
@@ -87,7 +77,6 @@
                     >
                 </div>
 
-                <!-- Price -->
                 <div>
                     <input 
                         type="number" 
@@ -98,7 +87,6 @@
                     >
                 </div>
 
-                <!-- Stock -->
                 <div>
                     <input 
                         type="number" 
@@ -109,7 +97,6 @@
                     >
                 </div>
 
-                <!-- Description -->
                 <div>
                     <input 
                         type="text" 
@@ -120,7 +107,6 @@
                     >
                 </div>
 
-                <!-- Image URL -->
                 <div>
                     <input 
                         type="text" 
@@ -131,7 +117,6 @@
                     >
                 </div>
 
-                <!-- Category Selection -->
                 <div>
                     <select 
                         name="CategoryId" 
@@ -143,7 +128,6 @@
                     </select>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="pt-4">
                     <input 
                         type="submit"

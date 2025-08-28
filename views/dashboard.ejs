@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopAll - Product Marketplace</title>
+    <title>JS Commerce - Product Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -12,11 +12,9 @@
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
                         <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
@@ -108,7 +106,6 @@
                                     $<%= el.price %>
                                 </span>
                                 
-                                <!-- Stock Info -->
                                 <% if (el.stock > 0) { %>
                                     <p class="text-gray-500 text-xs mt-1">
                                         Stok: <%= el.stock %>
@@ -129,7 +126,6 @@
                                     </a>
                                 <% } %>
                                 
-                                <!-- Owner Actions -->
                                 <% if (typeof uId !== 'undefined' && typeof el.UserId !== 'undefined' && el.UserId === uId) { %>
                                     <div class="flex space-x-2">
                                         <a href="/products/edit/<%= el.id %>" class="flex-1">
@@ -162,7 +158,6 @@
         <% } %>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="flex justify-between items-center">
