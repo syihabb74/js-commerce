@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       Product.hasMany(models.OrderItem, {foreignKey: 'ProductId'})
     }
 
-    get maxFourWords() {
+    maxFourWords() {
       let four = this.description.split(' ').slice(0,4).join(' ')
       return four
     }

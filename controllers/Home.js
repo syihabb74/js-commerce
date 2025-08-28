@@ -6,9 +6,9 @@ class Home {
 
         try {
 
+            const {username,uId,balance} = req.session;
             const categories = await Category.findAll();
-
-            res.render('home', {categories})
+            res.render('home', {categories, username,uId,balance})
             
         } catch (error) {
          

@@ -6,14 +6,14 @@ class Dashboard {
     static async GetListProduct (req,res) {
 
         try {
-
-            const {uId} = req.session;
+            const {uId,username,balance} = req.session;
             const categories = await Category.findAll();
             const {search, CategoryId, deleted} = req.query
             const listProduct = await Product.findProducts(search,CategoryId)
-            res.render('dashboard', {listProduct, uId, deleted, categories});
+            res.render('dashboard', {listProduct, uId, deleted, categories,username,balance});
             
         } catch (error) {
+            console.log(error)
             res.send(error)
         }
         
@@ -23,8 +23,9 @@ class Dashboard {
 
         try {
             const {productId} = req.params;
+            const {uId} = req.session;
             const product = await Product.findByPk(productId);
-            res.render('detailsProduct', {product})
+            res.render('detailsProduct', {product, uId})
         } catch (error) {
             res.send(error)
         }
@@ -54,6 +55,7 @@ class Dashboard {
             await OrderItem.create({quantity,price : product.price,OrderId : orderCreate.id,ProductId: productId, totalPrice : product.price * quantity})
             await user.decrement({balance : product.price * quantity});
             await product.decrement({stock : quantity})
+            req.session.balance = user.balance
             res.redirect('/products')
         } catch (error) {
             if (error.name === 'SequelizeValidationError') {
@@ -70,13 +72,15 @@ class Dashboard {
     static async CreateProduct (req,res) {
 
         try {
+
+            const {username,balance} = req.session
             
             let {errors} = req.query;
             if (errors !== undefined && errors.length) {
                 errors = errors.split(',')
             }
             const categories = await Category.findAll()
-            res.render('createProduct', {categories, errors})
+            res.render('createProduct', {categories, errors,username,balance})
         } catch (error) {
             console.log(error)
             res.send(error)

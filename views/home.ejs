@@ -23,33 +23,45 @@
                 </div>
                 
                 <nav class="hidden md:flex space-x-8">
-                    <a href="/" class="text-red-500 font-medium">Beranda</a>
-                    <a href="/categories" class="text-gray-600 hover:text-red-500 transition-colors">Kategori</a>
-                    <a href="/profile" class="text-gray-600 hover:text-red-500 transition-colors">Profil</a>
+                    <% if (uId) { %>
+                        <a href="/products" class="text-gray-600 hover:text-red-500 transition-colors">Products</a>
+                    <% } %>
                 </nav>
                 
                 <div class="flex items-center space-x-4">
-                    <button class="relative p-2 text-gray-400 hover:text-red-500 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                    </button>
-                    
-                    <a href="/profile">
-                        <div class="w-8 h-8 bg-orange-300 rounded-full flex items-center justify-center cursor-pointer hover:shadow-md transition-shadow">
-                            <div class="w-4 h-6 bg-amber-900 rounded-full"></div>
+                    <% if (username) { %>
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center bg-green-100 px-3 py-1 rounded-lg">
+                                <svg class="w-4 h-4 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                                <span class="text-green-700 font-semibold text-sm">
+                                    $<%= typeof balance !== 'undefined' ? balance : '0' %>
+                                </span>
+                            </div>
+                            
+                            <span class="text-gray-700 font-medium"><%= username %>!</span>
+                            
+                            <a href="/profile" class="flex items-center hover:opacity-80 transition-opacity">
+                                <div class="w-8 h-8 bg-orange-300 rounded-full flex items-center justify-center cursor-pointer hover:shadow-md transition-shadow">
+                                    <div class="w-4 h-6 bg-amber-900 rounded-full"></div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    <% } else { %>
+                        <div class="flex items-center space-x-3">
+                            <a href="/login" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-200">
+                                Login
+                            </a>
+                            <a href="/register" class="text-red-500 hover:text-red-600 font-medium transition-colors">
+                                Sign Up
+                            </a>
+                        </div>
+                    <% } %>
                 </div>
             </div>
         </div>
     </header>
-
-    <section class="relative bg-gradient-to-r from-green-400 via-green-500 to-green-600 overflow-hidden">
-        <div class="absolute inset-0">
-            <img class="w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=400&fit=crop" alt="Shopping background">
-        </div>
 
         <div class="absolute bottom-0 right-0 w-64 h-64 opacity-30">
             <svg viewBox="0 0 200 200" class="w-full h-full">
@@ -63,15 +75,23 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Categories</h2>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-             <% categories.forEach(el => { %>
-                    <div class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                        <div class="w-24 h-24 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-md">
-                            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=80&h=80&fit=crop" alt="Pakaian" class="w-16 h-16 object-cover rounded-xl">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                <% categories.forEach((el) => { %>
+                    <a href="/products?CategoryId=<%= el.id %>" class="group">
+                        <div class="bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl p-8 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                            <div class="w-24 h-24 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center shadow-md">
+                                <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=80&h=80&fit=crop" alt="<%= el.name %>" class="w-16 h-16 object-cover rounded-xl">
+                            </div>
+                            <h3 class="font-semibold text-gray-900"><%= el.name %></h3>
                         </div>
-                        <h3 class="font-semibold text-gray-900"><%= el.name %></h3>
-                    </div>
-             <% }) %>
+                    </a>
+                <% }) %>
+            <% } else { %>
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-500">No categories available at the moment.</p>
+                </div>
+            <% } %>
         </div>
     </section>
 
@@ -93,7 +113,7 @@
                 <div>
                     <h3 class="font-semibold text-gray-900 mb-4">Belanja</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-red-500 transition-colors text-sm">Produk Terbaru</a></li>
+                        <li><a href="/products" class="text-gray-600 hover:text-red-500 transition-colors text-sm">Produk Terbaru</a></li>
                         <li><a href="#" class="text-gray-600 hover:text-red-500 transition-colors text-sm">Penawaran Spesial</a></li>
                         <li><a href="#" class="text-gray-600 hover:text-red-500 transition-colors text-sm">Kategori</a></li>
                     </ul>
@@ -143,4 +163,3 @@
         </div>
     </footer>
 </body>
-</html>

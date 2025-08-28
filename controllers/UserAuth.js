@@ -12,7 +12,12 @@ class UserAuth {
     static async RegisterUser (req, res) {
 
         try {
-            const {errorpasswordmatch, erroremail,invalidcode, errors} = req.query;
+            let {errorpasswordmatch, erroremail,invalidcode, errors} = req.query;
+
+            if (errors) {
+                errors = errors.split(',');
+            }
+
             res.render('register', {
                 errorpasswordmatch,
                 erroremail,
@@ -21,6 +26,8 @@ class UserAuth {
             })
 
         } catch (error) {
+
+            console.log(error)
             
             res.send(error)
 
@@ -36,17 +43,16 @@ class UserAuth {
             if (password !== confirmationPass) throw { matchpassmsg : 'Password not matching'};
             await User.create({email,username,password});
             const verificationCode = Math.floor(100000 + Math.random() * 900000);
-            const hashingCode = hash(verificationCode)
+            const hashingCode = hash(verificationCode);
             await sendMail(verificationCode,email);
             res.redirect(`/register/verification/${email}?token=${hashingCode}`);
 
         } catch (error) {
-
             if (error.matchpassmsg) {
                 res.redirect(`/register?errorpasswordmatch=${error.matchpassmsg}`)
             } else {
                 if (error.name === 'SequelizeUniqueConstraintError') {
-                    const alreadyReg = error.errors[0].message
+                    let alreadyReg = `Email already registered`
                     res.redirect(`/register?erroremail=${alreadyReg}`);
                 } else if (error.name === 'SequelizeValidationError') {
                     error = error.errors.map((err) => {
@@ -137,9 +143,13 @@ class UserAuth {
             return res.redirect(`/register/verification/${email}?token=${hashingCode}`);
             }
 
+            console.log(isUserExist.balance)
+
             req.session.uId = isUserExist.id
             req.session.role = isUserExist.role
             req.session.isActive = isUserExist.isActive;
+            req.session.username = isUserExist.username;
+            req.session.balance = isUserExist.balance
 
             if (req.session.uId && req.session.role === 'user') {
                 return res.redirect('/products')
@@ -150,6 +160,7 @@ class UserAuth {
             }
 
         } catch (error) {
+            console.log(error)
             
             res.redirect(`/login?invalidlogin=${error.message}`)
 

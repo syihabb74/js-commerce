@@ -1,0 +1,82 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "dateOfBirth": "1990-05-15",
+    "gender": "Male",
+    "address": "123 Main Street, New York, NY 10001",
+    "UserId": 1
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "dateOfBirth": "1985-08-22",
+    "gender": "Female",
+    "address": "456 Oak Avenue, Los Angeles, CA 90210",
+    "UserId": 2
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Wilson",
+    "dateOfBirth": "1992-03-10",
+    "gender": "Male",
+    "address": "789 Pine Road, Chicago, IL 60601",
+    "UserId": 3
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Jones",
+    "dateOfBirth": "1988-11-30",
+    "gender": "Female",
+    "address": "321 Elm Street, Houston, TX 77001",
+    "UserId": 4
+  },
+  {
+    "firstName": "Alex",
+    "lastName": "Brown",
+    "dateOfBirth": "1995-07-18",
+    "gender": "Male",
+    "address": "654 Maple Drive, Phoenix, AZ 85001",
+    "UserId": 5
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Garcia",
+    "dateOfBirth": "1987-12-05",
+    "gender": "Female",
+    "address": "987 Cedar Lane, Philadelphia, PA 19101",
+    "UserId": 6
+  },
+  {
+    "firstName": "David",
+    "lastName": "Miller",
+    "dateOfBirth": "1991-09-14",
+    "gender": "Male",
+    "address": "147 Birch Street, San Antonio, TX 78201",
+    "UserId": 7
+  },
+  {
+    "firstName": "Emma",
+    "lastName": "Davis",
+    "dateOfBirth": "1993-04-27",
+    "gender": "Female",
+    "address": "258 Willow Avenue, San Diego, CA 92101",
+    "UserId": 8
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Anderson",
+    "dateOfBirth": "1989-01-08",
+    "gender": "Male",
+    "address": "369 Spruce Road, Dallas, TX 75201",
+    "UserId": 9
+  },
+  {
+    "firstName": "Olivia",
+    "lastName": "Taylor",
+    "dateOfBirth": "1994-06-12",
+    "gender": "Female",
+    "address": "741 Ash Drive, San Jose, CA 95101",
+    "UserId": 10
+  }
+]

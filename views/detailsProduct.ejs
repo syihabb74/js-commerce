@@ -46,32 +46,32 @@
                 <div class="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
                     <div class="grid grid-cols-4 gap-6">
                         <div class="relative h-24 bg-gray-100 rounded-md overflow-hidden cursor-pointer border-2 border-red-500">
-                            <img src="<%= typeof product !== 'undefined' ? product.imageUrl : 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop' %>" 
+                            <img src="<%= product.imageUrl %>" 
                                  alt="Product thumbnail" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
                 
                 <div class="w-full aspect-square">
-                    <img src="<%= typeof product !== 'undefined' ? product.imageUrl : 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop' %>" 
-                         alt="<%= typeof product !== 'undefined' ? product.name : 'Men\'s Classic Cotton T-Shirt' %>" 
+                    <img src="<%= product.imageUrl %>" 
+                         alt="<%= product.name %>" 
                          class="w-full h-full object-cover object-center bg-gray-100 rounded-lg">
                 </div>
             </div>
 
             <div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">
-                    <%= typeof product !== 'undefined' ? product.name : 'Men\'s Classic Cotton T-Shirt' %>
+                    <%= product.name %>
                 </h1>
                 
                 <p class="text-gray-600 mt-3 text-lg">
-                    <%= typeof product !== 'undefined' ? product.description : 'A timeless classic, this cotton t-shirt offers comfort and style for everyday wear. Made from soft, breathable fabric, it\'s perfect for any casual occasion.' %>
+                    <%= product.description %>
                 </p>
 
                 <div class="mt-6">
                     <div class="flex items-center">
                         <p class="text-3xl font-bold text-gray-900">
-                            $<%= typeof product !== 'undefined' ? product.price : '19.99' %>
+                            $<%= product.price %>
                         </p>
                         <div class="ml-4 flex items-center">
                             <div class="flex items-center">
@@ -96,23 +96,25 @@
                 </div>
 
                 <div class="mt-6">
-                    <% if (typeof product !== 'undefined' && product.stock > 0) { %>
+                    <% if ( product.stock > 0) { %>
                         <p class="text-green-600 font-semibold">In stock</p><span class="text-green-600 font-semibold"><%= product.stock %></span>
                     <% } else { %>
                         <p class="text-red-600 font-semibold">Out of stock</p>
                     <% } %>
                 </div>
 
-                <form action="/products/buy/<%= product.id %>" method="get">
-                    <div class="mt-8 flex items-center space-x-4">
-                        <div class="flex items-center border border-gray-300 rounded-md">
-                            <button class="px-3 py-2 text-gray-600 hover:text-gray-800">-</button>
-                            <input name="quantity" type="number" value="1" min="1" max="<%= product.stock %>" class="w-16 text-center border-0 focus:ring-0">
-                            <button class="px-3 py-2 text-gray-600 hover:text-gray-800">+</button>
-                        </div>
-                </form>
+                <% if (product.UserId !== uId) { %>
+                    <form action="/products/buy/<%= product.id %>" method="get">
+                        <div class="mt-8 flex items-center space-x-4">
+                            <div class="flex items-center border border-gray-300 rounded-md">
+                                <button class="px-3 py-2 text-gray-600 hover:text-gray-800">-</button>
+                                <input name="quantity" type="number" value="1" min="1" max="<%= product.stock %>" class="w-16 text-center border-0 focus:ring-0">
+                                <button class="px-3 py-2 text-gray-600 hover:text-gray-800">+</button>
+                            </div>
+                    </form>
+                <% } %>
 
-                <% if (typeof product !== 'undefined' && product.stock > 0) { %>
+                <% if (typeof product !== 'undefined' && product.stock > 0 && product.UserId !== uId) { %>
                     <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-lg font-semibold transition duration-200 flex items-center justify-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0h13M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
@@ -126,9 +128,20 @@
                         Buy Now
                     </button>
                 <% } else { %>
-                    <button disabled class="flex-1 bg-gray-300 text-gray-500 py-3 px-6 rounded-lg font-semibold cursor-not-allowed">
-                        Out of Stock
-                    </button>
+
+                    <% if (!product.stock) { %>
+                        <button disabled class="flex-1 bg-gray-300 text-gray-500 py-3 px-6 rounded-lg font-semibold cursor-not-allowed">
+                            Out of Stock
+                        </button>
+                    <% } else { %>
+                        <a href="/products/edit/<%= product.id %>" class="flex-1">
+                                            <button class="w-full bg-gray-500 hover:bg-gray-600 text-white py-2 px-3 rounded-lg text-xs font-medium transition duration-200">
+                                                Edit
+                                            </button>
+                                        </a>
+                    <% } %>
+
+
                 <% } %>
             </div>
                     
