@@ -22,7 +22,8 @@ class adminHome {
                 listProducts,
                 productsPrice: JSON.stringify(productsPrice),
                 listUsers,
-                active: 'home'
+                activeNav: 'home',
+                activeSide: 'home'
             })
 
         } catch (error) {
@@ -36,8 +37,35 @@ class adminHome {
             const listProduct = await Product.findAll();
             res.render('dashboardAdmin', {
                 listProduct,
-                active: 'products'
+                activeNav: 'products'
             })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async Order(req, res) {
+        try {
+            const listProducts = await Product.findAll();
+            const productsPrice = listProducts.map(el => ({
+                productName: el.name,
+                productPrice: el.price
+            }))
+            console.log(productsPrice.filter(el => el.productName))
+            const listUsers = await User.findAll({
+                where: {
+                    role: {
+                        [Op.ne]: 'admin'
+                    }
+                }
+            })  
+            res.render('orderPageAdmin', {
+                listProducts,
+                productsPrice: JSON.stringify(productsPrice),
+                listUsers,
+                activeSide: 'order',
+                activeNav: 'home'
+            }) 
         } catch (error) {
             res.send(error)
         }
