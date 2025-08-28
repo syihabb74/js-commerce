@@ -3,29 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
+    <title>Register - ShopAll</title>
     <%- include('partials/head') %>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f5f3f4;
+        }
+    </style>
 </head>
 <body>
-    <div class="min-h-screen w-full flex justify-center p-20" style="background-color: #EEE7E8">
-        <div class=" flex items-center justify-center bg-white rounded-2xl p-4 w-full">
-            <form action="/register" method="post">
-                <h1 style="text-align: center;" class="mb-10 text-2xl">Create Your Account</h1>
-                <div class="max-w-4xl grid grid-rows-6 gap-5">
-                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" name="username" type="text" placeholder="Username" id="">
-                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" name="email" type="email" placeholder="Email" id="">
-                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" name="password" type="password" placeholder="Password" id="">
-                        <input style="background-color: #F9FAFB ;display: inline-block;" class="w-lg h-10 shadow-sm px-3" name="confirmationPass" type="password" placeholder="Confirmation Password" id="">
-                        <input style="display: inline-block; font-size: 16px;" class="text-center w-lg h-10 shadow-sm bg-red-500 hover:bg-red-600 text-white px-2 text-xs py-1 rounded-md transition duration-300 font-semibold" value="Register" type="submit">
+    <div class="min-h-screen w-full flex items-center justify-center p-20">
+        <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+            <!-- Logo Section -->
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                        <div class="w-4 h-4 bg-white rounded"></div>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">ShopAll</span>
+                </div>
+                <h1 class="text-2xl font-semibold text-gray-900 mb-2">Create Your Account</h1>
+            </div>
+
+            <!-- Register Form -->
+            <form action="/register" method="post" class="space-y-6">
+                <!-- Error Messages -->
+                <% if (errorpasswordmatch) { %>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center">
+                        <%= errorpasswordmatch %>
+                    </div>
+                <% } %>
+                
+                <% if (erroremail) { %>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center">
+                        <%= erroremail %>
+                    </div>
+                <% } %>
+                
+                <% if (invalidcode) { %>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center">
+                        <%= invalidcode %>
+                    </div>
+                <% } %>
+
+                <!-- Username Field -->
+                <div>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        placeholder="Username"
+                    >
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        placeholder="Email"
+                    >
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        placeholder="Password"
+                    >
+                </div>
+
+                <!-- Confirmation Password Field -->
+                <div>
+                    <input 
+                        type="password" 
+                        name="confirmationPass" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        placeholder="Confirmation Password"
+                    >
+                </div>
+
+                <!-- Register Button -->
+                <div>
+                    <input 
+                        type="submit"
+                        value="Register" 
+                        class="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition duration-300 cursor-pointer"
+                    >
                 </div>
             </form>
+
+            <!-- Additional Links -->
+            <div class="mt-6 text-center">
+                <a href="/login" class="text-red-500 hover:text-red-600 font-medium transition-colors">
+                    Already have an account? Sign in
+                </a>
+            </div>
         </div>
     </div>
 </body>
 </html>
-
-
-
-
-
-

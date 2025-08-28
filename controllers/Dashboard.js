@@ -1,4 +1,5 @@
-const {Product, Category} = require('../models')
+
+const {Product, Category, User, Order, UserProfile, OrderItem} = require('../models')
 
 class Dashboard {
 
@@ -6,18 +7,14 @@ class Dashboard {
 
         try {
 
-            const {deleted} = req.query;
-
-            const listProduct = await Product.findAll();
-            console.log(listProduct)
-            const id = 3;
-
-            res.render('dashboard', {listProduct, id, deleted})
+            const {uId} = req.session;
+            const categories = await Category.findAll();
+            const {search, CategoryId, deleted} = req.query
+            const listProduct = await Product.findProducts(search,CategoryId)
+            res.render('dashboard', {listProduct, uId, deleted, categories});
             
         } catch (error) {
-            
             res.send(error)
-
         }
         
     }
@@ -25,19 +22,11 @@ class Dashboard {
     static async GetDetailProduct (req,res) {
 
         try {
-
-
             const {productId} = req.params;
-
             const product = await Product.findByPk(productId);
-
-            // res.render('test', {})
-            res.send('test')
-            
+            res.render('detailsProduct', {product})
         } catch (error) {
-            
             res.send(error)
-
         }
         
     }
@@ -45,13 +34,35 @@ class Dashboard {
     static async BuyProduct (req,res) {
 
         try {
+            let {quantity} = req.query
+            const {productId} = req.params
+            const user = await User.findByPk(req.session.uId, {
+                include : UserProfile
+            });
+            const product = await Product.findByPk(productId);
+            quantity = quantity || 1;
+            if (product.price * quantity > user.balance) {
+                throw {msg : 'Balance is not enough please re-charge first'}
+            }
 
-            res.send('test')
-            
+            const orderCreate = await Order.create({
+                totalAmount : quantity * product.price,
+                orderDate : new Date(),
+                shippingAddress : user.UserProfile.address,
+                UserId : req.session.uId
+            });
+            await OrderItem.create({quantity,price : product.price,OrderId : orderCreate.id,ProductId: productId, totalPrice : product.price * quantity})
+            await user.decrement({balance : product.price * quantity});
+            await product.decrement({stock : quantity})
+            res.redirect('/products')
         } catch (error) {
-            
-            res.send(error)
+            if (error.name === 'SequelizeValidationError') {
+                console.log(error.errors)
+                return res.redirect(`/profile?erroraddress=${error.errors[0].msg}`)
 
+            } else {
+                return res.redirect(`/profile?errorbalance=${error.msg}`)
+            }
         }
         
     }
@@ -59,13 +70,16 @@ class Dashboard {
     static async CreateProduct (req,res) {
 
         try {
-
-            res.send('test')
             
+            let {errors} = req.query;
+            if (errors !== undefined && errors.length) {
+                errors = errors.split(',')
+            }
+            const categories = await Category.findAll()
+            res.render('createProduct', {categories, errors})
         } catch (error) {
-            
+            console.log(error)
             res.send(error)
-
         }
         
     }
@@ -74,11 +88,22 @@ class Dashboard {
 
         try {
 
-            res.send('test')
+
+            const {name,price,stock,description,imageUrl,CategoryId} = req.body
+            await Product.create({name,price,stock,description,imageUrl,CategoryId,UserId : req.session.uId});
+            res.redirect('/products')
             
         } catch (error) {
-            
-            res.send(error)
+
+            if (error.name === 'SequelizeValidationError') {
+                console.log(error)
+                error = error.errors.map((value) => {
+                    return value.message
+                })
+                res.redirect(`/products/add?errors=${error}`)
+            } else {
+                res.send(error)
+            }
 
         }
         
@@ -87,12 +112,14 @@ class Dashboard {
     static async EditProduct (req,res) {
 
         try {
-
+            let {errors} = req.query;
+            if (errors && errors.length) {
+                errors = errors.split(',')
+            }
             const {productId} = req.params;
             const product = await Product.findByPk(productId);
             const categories = await Category.findAll();
-
-            res.render('editProduct', {product, categories})
+            res.render('editProduct', {product, categories, errors})
             
         } catch (error) {
             
@@ -107,13 +134,22 @@ class Dashboard {
         try {
 
             const {productId} = req.params;
-            const {name,price,stock,description,imageUrl,CategoryId} = req.body
-
-            res.send('test')
+            const {name,price,stock,description,imageUrl,CategoryId} = req.body;
+            const product = await Product.findByPk(productId)
+            await product.update({name,price,stock,description,imageUrl,CategoryId})
+            res.redirect('/products')
             
         } catch (error) {
-            
-            res.send(error)
+
+            const {productId} = req.params;
+            if (error.name === 'SequelizeValidationError') {
+                error = error.errors.map((value) => {
+                    return value.message
+                })
+                res.redirect(`/products/edit/${productId}?errors=${error}`)
+            } else {
+                res.send(error)
+            }
 
         }
         
@@ -125,14 +161,13 @@ class Dashboard {
 
             const {productId} = req.params;
             const product = await Product.findByPk(productId);
-            await Product.destroy({where : {
+            await Product.update({isActive : false},{where : {
                 id : productId
             }});
             res.redirect(`/products?deleted=${product.name}`)
             
         } catch (error) {
 
-            console.log(error)
             
             res.send(error)
 

@@ -12,11 +12,12 @@ class UserAuth {
     static async RegisterUser (req, res) {
 
         try {
-            const {errorpasswordmatch, erroremail,invalidcode} = req.query;
+            const {errorpasswordmatch, erroremail,invalidcode, errors} = req.query;
             res.render('register', {
                 errorpasswordmatch,
                 erroremail,
-                invalidcode
+                invalidcode,
+                errors
             })
 
         } catch (error) {
@@ -30,8 +31,6 @@ class UserAuth {
     static async PostRegisterUser (req, res) {
 
         try {
-
-            console.log(req.body)
 
             const {email,username,password,confirmationPass} = req.body
             if (password !== confirmationPass) throw { matchpassmsg : 'Password not matching'};
@@ -53,7 +52,7 @@ class UserAuth {
                     error = error.errors.map((err) => {
                         return err.message;
                     });
-                    res.send(error)
+                    res.redirect(`register?errors=${error}`)
                     
                 } else {
                     res.send(error)
@@ -125,12 +124,30 @@ class UserAuth {
     static async PostLoginUser (req, res) {
 
         try {
+
             const {email, password} = req.body;
-            const isUserExist = await User.findOne({email});
+            const isUserExist = await User.findOne({where : {email}});
             if (!isUserExist) throw {message : 'Invalid email/password'};
             const isPasswordCorrect = bcryptjs.compareSync(password,isUserExist.dataValues.password);
             if (!isPasswordCorrect) throw { message : 'Invalid email/password' };
-            res.send('Anda sudah masuk')
+            if (!isUserExist.isActive) {
+            const verificationCode = Math.floor(100000 + Math.random() * 900000);
+            const hashingCode = hash(verificationCode)
+            await sendMail(verificationCode,email);
+            return res.redirect(`/register/verification/${email}?token=${hashingCode}`);
+            }
+
+            req.session.uId = isUserExist.id
+            req.session.role = isUserExist.role
+            req.session.isActive = isUserExist.isActive;
+
+            if (req.session.uId && req.session.role === 'user') {
+                return res.redirect('/products')
+            } else if (req.session.uId && req.session.role === 'admin') {
+                return res.redirect('/admin')
+            } else {
+                return res.redirect('/login')
+            }
 
         } catch (error) {
             

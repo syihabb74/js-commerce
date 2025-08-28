@@ -1,0 +1,102 @@
+[
+    {
+      "id": 1,
+      "totalAmount": 1299,
+      "status": "completed",
+      "shippingAddress": "123 Main St, New York, NY 10001",
+      "paymentMethod": "credit_card",
+      "createdAt": "2024-01-20T14:30:00.000Z",
+      "updatedAt": "2024-01-22T16:45:00.000Z",
+      "UserId": 1
+    },
+    {
+      "id": 2,
+      "totalAmount": 312,
+      "status": "shipped",
+      "shippingAddress": "456 Oak Ave, Los Angeles, CA 90210",
+      "paymentMethod": "paypal",
+      "createdAt": "2024-01-25T10:15:00.000Z",
+      "updatedAt": "2024-01-26T09:30:00.000Z",
+      "UserId": 2
+    },
+    {
+      "id": 3,
+      "totalAmount": 24,
+      "status": "completed",
+      "shippingAddress": "789 Pine Rd, Chicago, IL 60601",
+      "paymentMethod": "credit_card",
+      "createdAt": "2024-02-01T16:20:00.000Z",
+      "updatedAt": "2024-02-03T11:00:00.000Z",
+      "UserId": 3
+    },
+    {
+      "id": 4,
+      "totalAmount": 1248,
+      "status": "processing",
+      "shippingAddress": "321 Elm St, Houston, TX 77001",
+      "paymentMethod": "bank_transfer",
+      "createdAt": "2024-02-05T13:45:00.000Z",
+      "updatedAt": "2024-02-06T08:20:00.000Z",
+      "UserId": 4
+    },
+    {
+      "id": 5,
+      "totalAmount": 398,
+      "status": "shipped",
+      "shippingAddress": "654 Maple Dr, Phoenix, AZ 85001",
+      "paymentMethod": "credit_card",
+      "createdAt": "2024-02-08T12:00:00.000Z",
+      "updatedAt": "2024-02-09T15:30:00.000Z",
+      "UserId": 5
+    },
+    {
+      "id": 6,
+      "totalAmount": 42,
+      "status": "completed",
+      "shippingAddress": "987 Cedar Ln, Philadelphia, PA 19101",
+      "paymentMethod": "paypal",
+      "createdAt": "2024-02-10T09:30:00.000Z",
+      "updatedAt": "2024-02-12T14:15:00.000Z",
+      "UserId": 6
+    },
+    {
+      "id": 7,
+      "totalAmount": 999,
+      "status": "cancelled",
+      "shippingAddress": "147 Birch St, San Antonio, TX 78201",
+      "paymentMethod": "credit_card",
+      "createdAt": "2024-02-12T11:45:00.000Z",
+      "updatedAt": "2024-02-13T10:00:00.000Z",
+      "UserId": 7
+    },
+    {
+      "id": 8,
+      "totalAmount": 1448,
+      "status": "completed",
+      "shippingAddress": "258 Willow Way, San Diego, CA 92101",
+      "paymentMethod": "credit_card",
+      "createdAt": "2024-02-15T15:00:00.000Z",
+      "updatedAt": "2024-02-18T12:30:00.000Z",
+      "UserId": 1
+    },
+    {
+      "id": 9,
+      "totalAmount": 211,
+      "status": "processing",
+      "shippingAddress": "369 Spruce Ave, Dallas, TX 75201",
+      "paymentMethod": "bank_transfer",
+      "createdAt": "2024-02-18T08:45:00.000Z",
+      "updatedAt": "2024-02-19T07:15:00.000Z",
+      "UserId": 3
+    },
+    {
+      "id": 10,
+      "totalAmount": 763,
+      "status": "shipped",
+      "shippingAddress": "741 Poplar Rd, San Jose, CA 95101",
+      "paymentMethod": "paypal",
+      "createdAt": "2024-02-20T13:20:00.000Z",
+      "updatedAt": "2024-02-21T16:45:00.000Z",
+      "UserId": 5
+    }
+  ]

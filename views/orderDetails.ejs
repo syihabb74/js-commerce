@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+</style>
+</head>
+<body class="bg-white">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden font-['Plus_Jakarta_Sans']">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-10 py-4">
+<div class="flex items-center gap-3 text-2xl font-bold text-gray-900">
+<svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+<h1 class="tracking-tight">ShopEase</h1>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaVYfeAAzxYKo-5y3foqh_xFhgDJokmS0uPOGoKASIY0npX_D1v28Uniw3Nd_CdivtOmnheAnczbbA3nuCkK92rulyCMPRgFHpy8giivcKAdklEjSJj0n4rGKKbrGidmT4Pm29TRaJiHarheHkzIJYRaPDeXSAUL2gcM21KZfisMpVV_AAK7uaOXW4CvkbxFk2o-FWyoA6MTNkZXnFIrrlDRQ-bIFqtBZwfsLFsOtY9sUxmyKnjouiSRZb_fQ0j69VOifQMtqykMZ7')"></div>
+</div>
+</header>
+<main class="flex-1 px-4 sm:px-6 lg:px-8 py-8">
+<div class="mx-auto max-w-4xl">
+<div class="mb-6 flex items-center gap-2 text-sm text-gray-500">
+<a class="hover:text-red-600" href="/profile/orders">Orders</a>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+<span class="font-semibold text-gray-900">Order Details</span>
+</div>
+<div class="mb-8">
+<h2 class="text-3xl font-extrabold text-gray-900">Detail Pesanan</h2>
+<p class="text-base text-gray-500">Order Id: #<%= order.id %></p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<div class="rounded-md border border-gray-200 bg-white p-6 shadow-sm">
+<h3 class="text-xl font-bold text-gray-900 mb-4">Item Orders</h3>
+
+<% orderItems.forEach(el => { %>
+    <div class="space-y-4">
+    <div class="flex items-center gap-4">
+    <div class="bg-center mb-5 bg-no-repeat aspect-square bg-cover rounded-md size-16" style='background-image: url("<%= el.Product.imageUrl %>");'></div>
+    <div class="flex-1">
+    <p class="font-semibold text-gray-900"><%= el.Product.name %></p>
+    <p class="text-sm text-gray-500">Quantity: <%= el.quantity %></p>
+    </div>
+    <p class="font-semibold text-gray-900">$<%= el.quantity * el.price %></p>
+    </div>
+    </div>
+<% }) %>
+
+
+</div>
+<div class="rounded-md border border-gray-200 bg-white p-6 shadow-sm">
+<h3 class="text-xl font-bold text-gray-900 mb-4">Shipping Information</h3>
+<div class="space-y-2">
+<p class="font-semibold text-gray-900">Shipping Address</p>
+<p class="text-gray-500"><%= order.shippingAddress %></p>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="rounded-md border border-gray-200 bg-white p-6 shadow-sm">
+<h3 class="text-xl font-bold text-gray-900 mb-4">Ringkasan Pesanan</h3>
+<div class="space-y-3">
+<div class="border-t border-gray-200 my-3"></div>
+<div class="flex justify-between text-lg font-bold text-gray-900">
+<span>Total</span>
+<span>$<%= order.totalAmount %></span>
+</div>
+</div>
+</div>
+<div class="rounded-md border border-gray-200 bg-white p-6 shadow-sm">
+<h3 class="text-xl font-bold text-gray-900 mb-4">Status Pesanan</h3>
+<div class="flex items-center gap-3">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-black"></span>
+</span>
+<p class="font-semibold text-black">Received</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body>
+</html>

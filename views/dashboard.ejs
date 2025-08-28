@@ -3,58 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
-    <%- include('partials/head') %>
+    <title>ShopAll - Product Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f5f3f4;
+        }
+    </style>
 </head>
-<body>
-    <div class="min-h-screen w-full flex justify-center p-20" style="background-color: #EEE7E8">
-        <% if (deleted) { %>
-            <h2 class="text-red-500 text-center"><%= deleted %> Has been Successfully Deleted</h2>
-        <% } %>
-        <div class="grid grid-cols-5 bg-white gap-3 rounded-2xl p-4" style="background-color: #F9FAFB;">
-            <% listProduct.forEach(el => { %>
-                <div class="bg-white rounded-xl overflow-hidden hover:shadow-2xl shadow-lg transition duration-500 ease-in-out">
-                    <div class="overflow-hidden">
-                        <img class="w-full h-48 object-cover" src="<%= el.imageUrl %>" alt="<%= el.name %>">
-                    </div>
-                    <div class="p-3">
-                        <h3 class="font-semibold text-lg mb-2"><%= el.name %></h3>
-                        <div>
-                            <p class="text-gray-600 text-sm mb-2"><%= el.maxFourWords %><a style="color: black;" href="/products/<%= el.id %>"> Get Details...</a></p>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                            <div class="w-4 h-4 bg-white rounded"></div>
                         </div>
-                        <h2 class="text-red-500 font-bold text-xl">$<%= el.price %></h2>
-                        <% if (el.price) { %>
-                            <h2 class="mb-2 mt-2 text-red-400 font-bold text-sm">Stock : <%= el.stock %></h2>
-                        <% } else { %>
-                            <h2 class="mb-2 mt-2 text-red-400 font-bold text-sm">Out Of Stock</h2>
+                        <span class="text-xl font-bold text-gray-900">ShopAll</span>
+                    </div>
+                </div>
+                
+                <div class="flex-1 max-w-lg mx-8">
+                    <form action="/products" method="get" class="relative">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input name="search" type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500" placeholder="Cari produk..." />
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-500">
+                    </button>
+                    <a href="/profile">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                    </a>
+                        
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 py-4">
+                <form action="/products" method="get" class="flex items-center space-x-4">
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-200">
+                        Search By Category
+                    </button>
+                    <select name="CategoryId" class="bg-gray-50 border border-gray-200 text-gray-700 py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                        <option selected disabled>Pilih Kategori</option>
+                        <% if (typeof categories !== 'undefined') { %>
+                            <% categories.forEach(category => { %>
+                                <option value="<%= category.id %>"><%= category.name %></option>
+                            <% }) %>
                         <% } %>
-                        <div class="grid grid-rows-3 gap-3">
-                                <% if (id !== el.UserId) { %>
-                                    <div>
-                                    <a href="buy/1/<%= el.id %>">
-                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 text-xs py-1 rounded-md transition duration-300 font-semibold">Buy Now</button>
-                                    </a>
-                                    </div>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <% if (deleted) { %>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+                <%= deleted %> telah berhasil dihapus
+            </div>
+        </div>
+    <% } %>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <% if (typeof listProduct !== 'undefined') { %>
+                <% listProduct.forEach(el => { %>
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-300 overflow-hidden">
+                        <div class="aspect-square overflow-hidden bg-gray-100">
+                            <img class="w-full h-full object-cover hover:scale-105 transition duration-300" 
+                                 src="<%= el.imageUrl %>" 
+                                 alt="<%= el.name %>" 
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGM0Y0RjYiLz48L3N2Zz4='">
+                        </div>
+                        
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 text-sm mb-2 line-clamp-2 leading-tight">
+                                <%= el.name %>
+                            </h3>
+                            
+                            <p class="text-gray-600 text-xs mb-3 line-clamp-2">
+                                <%= typeof el.maxFourWords !== 'undefined' ? el.maxFourWords : '' %>
+                                <a href="/products/<%= el.id %>" class="text-blue-600 hover:text-blue-800 ml-1">
+                                    Lihat detail...
+                                </a>
+                            </p>
+                            
+                            <div class="mb-3">
+                                <span class="text-red-500 font-bold text-lg">
+                                    $<%= el.price %>
+                                </span>
+                                
+                                <!-- Stock Info -->
+                                <% if (el.stock > 0) { %>
+                                    <p class="text-gray-500 text-xs mt-1">
+                                        Stok: <%= el.stock %>
+                                    </p>
+                                <% } else { %>
+                                    <p class="text-red-500 text-xs mt-1 font-medium">
+                                        Stok Habis
+                                    </p>
                                 <% } %>
-                                <% if (el.UserId === id) { %>
-                                    <div>
-                                        <a href="products/edit/<%= el.id %>">
-                                            <button class="bg-gray-500 hover:bg-gray-600 text-white px-2 text-xs py-1 rounded-md transition duration-300 font-semibold">Edit Product</button>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <% if (uId && typeof el.UserId !== 'undefined' && uId !== el.UserId) { %>
+                                    <a href="/products/buy/<%= el.id %>" class="block">
+                                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm font-medium transition duration-200">
+                                            Beli Sekarang
+                                        </button>
+                                    </a>
+                                <% } %>
+                                
+                                <!-- Owner Actions -->
+                                <% if (typeof uId !== 'undefined' && typeof el.UserId !== 'undefined' && el.UserId === uId) { %>
+                                    <div class="flex space-x-2">
+                                        <a href="/products/edit/<%= el.id %>" class="flex-1">
+                                            <button class="w-full bg-gray-500 hover:bg-gray-600 text-white py-2 px-3 rounded-lg text-xs font-medium transition duration-200">
+                                                Edit
+                                            </button>
+                                        </a>
+                                        <a href="/products/delete/<%= el.id %>" class="flex-1">
+                                            <button class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded-lg text-xs font-medium transition duration-200">
+                                                Hapus
+                                            </button>
                                         </a>
                                     </div>
                                 <% } %>
-                            <% if (el.UserId === id) { %>
-                                <div>
-                                    <a href="/products/delete/<%= el.id %>">
-                                        <button class="bg-red-500 hover:bg-red-600 text-white px-2 text-xs py-1 rounded-md transition duration-300 font-semibold">Delete Product</button>
-                                    </a>
-                                </div>
-                            <% } %>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <% }) %>
+                <% }) %>
+            <% } %>
         </div>
-    </div>
+        
+        <% if (typeof listProduct === 'undefined' || listProduct.length === 0) { %>
+            <div class="text-center py-12">
+                <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-4m-4 0H9m11 0a2 2 0 01-2 2M7 13a2 2 0 01-2-2M5 11V6a2 2 0 012-2h4" />
+                </svg>
+                <h3 class="mt-4 text-lg font-medium text-gray-900">Tidak ada produk</h3>
+                <p class="mt-2 text-gray-500">Belum ada produk yang tersedia saat ini.</p>
+            </div>
+        <% } %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex justify-between items-center">
+                <p class="text-gray-500 text-sm">© 2024 ShopAll. Semua hak dilindungi.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-700 text-sm">Privasi</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-700 text-sm">Syarat</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-700 text-sm">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

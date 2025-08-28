@@ -11,9 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+
     static associate(models) {
       User.hasOne(models.UserProfile, {foreignKey: 'UserId'});
-      User.hasMany(models.Product, {foreignKey : 'UserId'})
+      User.hasMany(models.Product, {foreignKey : 'UserId'});
+      User.hasMany(models.Order, {foreignKey : 'UserId'})
     }
   }
   User.init({
@@ -74,6 +77,7 @@ module.exports = (sequelize, DataTypes) => {
       usr.username = `Anon${randomId}`
     }
   })
+
 
   User.afterCreate(async (usr) => {
      await usr.createUserProfile()

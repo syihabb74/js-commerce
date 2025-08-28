@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Riwayat Pesanan - ShopEase</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="bg-white shadow-sm">
+<div class="container mx-auto flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-gray-900">
+<svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+<h2 class="text-2xl font-bold tracking-tight">JS Commerce</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-gray-600 hover:text-red-600 transition-colors" href="/products">Beranda</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<div class="hidden sm:block relative w-full max-w-xs">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+</div>
+</div>
+<a href="/profile">
+    <div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7UEo8to3vSQBb3qYWDpTL302jTnQItp5_2h2diJQE_ljSzgaueRvRnt31Rqo4L2BPmxfJwppNAIlrPAu-nFFi71q-X6RbTISz1ErCI9aLW4xPQTzE0MIZWs6biLyaVpCcShidss-h60BUX1Hfdbx-nd53WrBPay0a4t8pOF1KR0P0zN6NKvhy4OjMxFEZqp_2r2rJM-tcF3Qm8lWtfieVZf0NftgWbwCl4lQ8sKI7gkgA9gX5ZSQDjEYFdV_GKiMkbc7P3ZyVIQvY");'></div>
+</a>
+</div>
+</div>
+</header>
+<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-4xl mx-auto">
+<h1 class="text-3xl font-extrabold tracking-tight text-gray-900 mb-8">Riwayat Pesanan</h1>
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full min-w-full divide-y divide-gray-200">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Order No</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Date</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" scope="col">Total</th>
+<th class="relative px-6 py-3" scope="col"><span class="sr-only">Detail</span></th>
+</tr>
+</thead>
+<tbody class="bg-white divide-y divide-gray-200">
+    <% orders.forEach(el => { %>
+        <tr class="hover:bg-gray-50 transition-colors cursor-pointer">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#<%= el.id %></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= el.formatDateOrder %></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= el.totalAmount %></td>
+        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <a class="text-red-600 hover:text-red-700" href="/profile/orders/<%= el.id %>">Lihat Detail</a>
+        </td>
+        </tr>
+    <% }) %>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body>
+</html>

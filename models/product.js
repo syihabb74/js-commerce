@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model
+  Model,
+  Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
@@ -12,12 +13,32 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Product.belongsTo(models.User, {foreignKey: 'UserId'});
       Product.belongsTo(models.Category, {foreignKey : 'CategoryId'})
+      Product.hasMany(models.OrderItem, {foreignKey: 'ProductId'})
     }
-
 
     get maxFourWords() {
       let four = this.description.split(' ').slice(0,4).join(' ')
       return four
+    }
+
+    static async findProducts (search, CategoryId) {
+      const options = {where : {
+                      isActive : true
+                  }}
+                  
+                  if (search) {
+                      options.where.name = {
+                              [Op.iLike] : `%${search}%`
+                      }
+                  }
+      
+                  if (CategoryId) {
+                      options.where.CategoryId = {
+                              [Op.eq] : CategoryId
+                      }
+                  }
+      
+                  return await Product.findAll(options);
     }
 
   }
@@ -91,10 +112,16 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     UserId: DataTypes.INTEGER,
-    CategoryId: DataTypes.INTEGER
+    CategoryId: DataTypes.INTEGER,
+    isActive : DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Product',
   });
+
+  Product.beforeCreate((product) => {
+    product.isActive = true;
+  })
+
   return Product;
 };

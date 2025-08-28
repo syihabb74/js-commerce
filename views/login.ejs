@@ -3,46 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login - ShopAll</title>
     <%- include('partials/head') %>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        body {
+            background-color: #f5f3f4;
         }
     </style>
 </head>
 <body>
+    <div class="min-h-screen w-full flex items-center justify-center p-20">
+        <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+            <!-- Logo Section -->
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                        <div class="w-4 h-4 bg-white rounded"></div>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">ShopAll</span>
+                </div>
+                <h1 class="text-2xl font-semibold text-gray-900 mb-2">Login Your Account</h1>
+            </div>
 
-    <div class="min-h-screen w-full flex justify-center items-center p-20" style="background-color: #EEE7E8;">
-        <div class="w-5xl h-8xl p-10 flex justify-center bg-white rounded-2xl">
-            <form action="/login" method="post">
-                <center>
-                    <div style="margin-bottom: 20px;">
-                        <h1 class="text-2xl text-center">Login to Your Account</h1>
+            <!-- Login Form -->
+            <form action="/login" method="post" class="space-y-6">
+                <!-- Error Message -->
+                <% if (invalidlogin) { %>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center">
+                        <%= invalidlogin %>
                     </div>
-                </center>
-                <div class="grid grid-rows-5 max-w-xl gap-5">
-                    <div class="border-black">
-                        <input placeholder="Email" class="w-2xl border-black" name="email" type="email">
-                    </div>
-                    <div class="border-black">
-                        <input placeholder="Password" class="w-2xl border-black" name="password" type="password">
-                    </div>
-                    <center>
-                        <div class="border-black">
-                            <input type="submit" style="background-color: #EA2A32; padding: 10px;" class="rounded-xl" value="Login">
-                        </div>
-                        <% if (invalidlogin) { %>
-                         <p class="text-red-500"><%= invalidlogin %></p>
-                        <% } %>
-                    </center>
+                <% } %>
+
+                <!-- Email Field -->
+                <div>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        placeholder="Email"
+                    >
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        placeholder="Password"
+                    >
+                </div>
+
+                <!-- Login Button -->
+                <div>
+                    <input 
+                        type="submit"
+                        value="Login" 
+                        class="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition duration-300 cursor-pointer"
+                    >
                 </div>
             </form>
+
+            <!-- Additional Links -->
+            <div class="mt-6 text-center">
+                <a href="/register" class="text-red-500 hover:text-red-600 font-medium transition-colors">
+                    Don't have an account? Sign up
+                </a>
+            </div>
         </div>
     </div>
-    
-
-    
 </body>
 </html>

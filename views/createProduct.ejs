@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product - ShopAll</title>
+    <title>Add Product - ShopAll</title>
     <%- include('partials/head') %>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -13,11 +13,9 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
                         <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
@@ -27,16 +25,12 @@
                     </div>
                 </div>
                 
-                <!-- Navigation -->
                 <nav class="hidden md:flex space-x-6">
                     <a href="/products" class="text-gray-600 hover:text-red-500">Products</a>
-                    <a href="/categories" class="text-gray-600 hover:text-red-500">Categories</a>
                     <a href="/profile" class="text-gray-600 hover:text-red-500">Profile</a>
                 </nav>
                 
-                <!-- User Actions -->
                 <div class="flex items-center space-x-4">
-                    <!-- Balance Display -->
                     <div class="flex items-center bg-green-100 px-3 py-1 rounded-lg">
                         <svg class="w-4 h-4 text-green-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
@@ -58,15 +52,18 @@
 
     <div class="min-h-screen w-full flex items-center justify-center p-20">
         <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-2xl">
-            <!-- Logo Section -->
             <div class="text-center mb-8">
-                <h1 class="text-2xl font-semibold text-gray-900 mb-2">Edit Product</h1>
+                <div class="flex justify-center mb-4">
+                    <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                        <div class="w-4 h-4 bg-white rounded"></div>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">ShopAll</span>
+                </div>
+                <h1 class="text-2xl font-semibold text-gray-900 mb-2">Add Product</h1>
             </div>
 
-            <!-- Edit Product Form -->
-            <form action="/products/edit/<%= product.id %>" method="post" class="space-y-6">
-                <!-- Error Messages -->
-                <% if (errors && errors.length) { %>
+            <form action="/products/add" method="post" class="space-y-6">
+                <% if (errors !== undefined) { %>
                     <div class="space-y-2">
                         <% errors.forEach(error => { %>
                             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center">
@@ -76,78 +73,67 @@
                     </div>
                 <% } %>
 
-                <!-- Product Name -->
                 <div>
                     <input 
                         type="text" 
                         name="name" 
-                        value="<%= product.name %>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                         placeholder="Name Product"
                     >
                 </div>
 
-                <!-- Price -->
                 <div>
                     <input 
                         type="number" 
                         name="price" 
-                        value="<%= product.price %>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                         placeholder="Price Product"
                     >
                 </div>
 
-                <!-- Stock -->
                 <div>
                     <input 
                         type="number" 
                         name="stock" 
-                        value="<%= product.stock %>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                         placeholder="Stock Product"
                     >
                 </div>
 
-                <!-- Description -->
                 <div>
                     <input 
                         type="text" 
                         name="description" 
-                        value="<%= product.description %>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                         placeholder="Description Product"
                     >
                 </div>
 
-                <!-- Image URL -->
                 <div>
                     <input 
                         type="text" 
                         name="imageUrl" 
-                        value="<%= product.imageUrl %>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                         placeholder="Image Product"
                     >
                 </div>
 
-                <!-- Category Selection -->
                 <div>
                     <select 
                         name="CategoryId" 
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200"
                     >
+                        <option value="" disabled selected>Select Category</option>
                         <% categories.forEach(category => { %>
-                            <option <%= category.id === product.CategoryId ? 'selected' : '' %> value="<%= category.id %>"><%= category.name %></option>
+                            <option value="<%= category.id %>"><%= category.name %></option>
                         <% }) %>
                     </select>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="pt-4">
                     <input 
                         type="submit"
-                        value="Edit Product" 
+                        value="Create Product" 
                         class="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition duration-300 cursor-pointer"
                     >
                 </div>
