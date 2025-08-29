@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopEase - Profil User</title>
+    <title>Profil User - JS Commerce</title>
     <%- include('partials/head') %>
     <style>
         body {
@@ -20,7 +20,7 @@
                         <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
                             <div class="w-4 h-4 bg-white rounded"></div>
                         </div>
-                        <span class="text-xl font-bold text-gray-900">ShopAll</span>
+                        <span class="text-xl font-bold text-gray-900">JS Commerce</span>
                     </div>
                 </div>
                 
@@ -78,19 +78,12 @@
                         </div>
                         
                         <div class="space-y-2">
-                            <a href="#informasi-pribadi" class="flex items-center p-4 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors">
-                                <svg class="w-5 h-5 mr-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="font-medium">Informasi Pribadi</span>
-                            </a>
-                            
                             <a href="/profile/orders" class="flex items-center p-4 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors">
                                 <svg class="w-5 h-5 mr-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
                                     <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 102 0V3h4v1a1 1 0 102 0V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="font-medium text-gray-600">Riwayat Pesanan</span>
+                                <span class="font-medium text-gray-600">Order History</span>
                             </a>
                             
                             <a href="/products/add" class="flex items-center p-4 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors">
@@ -100,7 +93,7 @@
                                 <span class="font-medium text-gray-600">Create Product</span>
                             </a>
                             
-                            <a href="#" class="flex items-center p-4 text-red-500 rounded-xl hover:bg-red-50 transition-colors">
+                            <a href="/logout" class="flex items-center p-4 text-red-500 rounded-xl hover:bg-red-50 transition-colors">
                                 <svg class="w-5 h-5 mr-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
                                 </svg>
@@ -113,7 +106,7 @@
 
             <div class="bg-white col-span-3 shadow-lg rounded-2xl p-8">
                 <div id="informasi-pribadi" class="mb-10">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Informasi Pribadi</h2>    
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Personal Information</h2>    
                     <form method="POST" action="/profile" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>

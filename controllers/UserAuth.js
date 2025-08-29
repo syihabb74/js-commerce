@@ -99,7 +99,7 @@ class UserAuth {
             const isValidCode = bcryptjs.compareSync(verification, token);
             if (isValidCode) {
                 await User.update({isActive : true}, {where: {email : email}});
-                return res.redirect('/')
+                return res.redirect('/login')
             };
             throw {message : 'Invalid code verification'} 
 
@@ -124,13 +124,11 @@ class UserAuth {
             res.send(error)
 
         }
-
     }
     
     static async PostLoginUser (req, res) {
 
         try {
-
             const {email, password} = req.body;
             const isUserExist = await User.findOne({where : {email}});
             if (!isUserExist) throw {message : 'Invalid email/password'};
@@ -143,7 +141,7 @@ class UserAuth {
             return res.redirect(`/register/verification/${email}?token=${hashingCode}`);
             }
 
-            console.log(isUserExist.balance)
+            // console.log(isUserExist.balance)
 
             req.session.uId = isUserExist.id
             req.session.role = isUserExist.role
@@ -158,17 +156,25 @@ class UserAuth {
             } else {
                 return res.redirect('/login')
             }
-
         } catch (error) {
-            console.log(error)
-            
+            // console.log(error)
             res.redirect(`/login?invalidlogin=${error.message}`)
-
         }
-
     }
     
-
+     static async getLogout(req, res) {
+        try {
+            req.session.destroy(err => {
+                if (err) {
+                    res.send(err)
+                } else{
+                    res.redirect('/login')
+                }
+            })
+        } catch (error) {
+            res.send(error)
+        }
+    }
 
 }
 

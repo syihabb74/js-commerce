@@ -48,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate : {
         notNull : {
-          msg : 'Product Name is empty please fill product name'
+          msg : 'Product Name is empty! please fill product name'
         },
         notEmpty : {
-          msg : 'Product Name is empty please fill product name'
+          msg : 'Product Name is empty! please fill product name'
         }
       }
     },
@@ -60,10 +60,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate : {
         notEmpty : {
-          msg : 'Price is empty please fill price',
+          msg : 'Price is empty! please fill price',
         },
         notNull : {
-          msg : 'Price is empty please fill price'
+          msg : 'Price is empty! please fill price'
         },
         min : {
           args : 1,
@@ -76,10 +76,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate : {
         notEmpty : {
-          msg : 'Price is empty please fill stock',
+          msg : 'Stock is empty! Please fill stock',
         },
         notNull : {
-          msg : 'Price is empty please fill stock'
+          msg : 'Stock is empty! Please fill stock'
         },
         min : {
           args : 1,
@@ -92,10 +92,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate : {
         notEmpty : {
-          msg : 'Description is empty please fill description',
+          msg : 'Description is empty! please fill description',
         },
         notNull : {
-          msg : 'Description is empty please fill description'
+          msg : 'Description is empty! please fill description'
         }
       }
     },
@@ -104,10 +104,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate : {
         notEmpty : {
-          msg : 'Image Url is empty please fill image url',
+          msg : 'Image Url is empty! please fill image url',
         },
         notNull : {
-          msg : 'Image Url is empty please fill image url'
+          msg : 'Image Url is empty! please fill image url'
         }
       }
     },
