@@ -59,9 +59,7 @@ class Dashboard {
             res.redirect('/products')
         } catch (error) {
             if (error.name === 'SequelizeValidationError') {
-                console.log(error.errors)
-                return res.redirect(`/profile?erroraddress=${error.errors[0].msg}`)
-
+                return res.redirect(`/profile?erroraddress=${error.errors[0].message}`)
             } else {
                 return res.redirect(`/profile?errorbalance=${error.msg}`)
             }

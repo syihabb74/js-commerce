@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
   User.afterCreate(async (usr) => {
-     await usr.createUserProfile()
+     await usr.createUserProfile({dateOfBirth: new Date()})
   })
 
   return User;
